@@ -50,7 +50,7 @@
 
 }
 .hint{
-    margin-left: 320px;
+    margin-left: 0px;
     text-align:left;
     font-size: 0.8rem;
     margin-top: -10px;
@@ -60,3 +60,4 @@
     margin-top: 20px;
     font-size: 1rem;
 }
+
