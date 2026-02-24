@@ -51,13 +51,14 @@
 }
 .hint{
     margin-left: 0px;
-    text-align:left;
+    text-align:center;
     font-size: 0.8rem;
     margin-top: -10px;
 }
 .hint_heading{
-    text-align: center;
+    /* text-align: center; */
     margin-top: 20px;
     font-size: 1rem;
 }
+
 
