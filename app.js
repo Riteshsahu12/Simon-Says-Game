@@ -10,32 +10,31 @@ let h4 = document.querySelector("h4");
 
 h4.innerText = "Tap screen or press any key to start";
 
-// start game — works for desktop + mobile
 function startGame() {
   if (!started) {
-    console.log("Game Started");
     started = true;
     levelUp();
   }
 }
 
+// start on keypress
 document.addEventListener("keypress", startGame);
-document.addEventListener("click", startGame);
+
+// start on click BUT not on game buttons
+document.addEventListener("click", function (event) {
+  if (!started && !event.target.classList.contains("btn")) {
+    startGame();
+  }
+});
 
 function btnFlash(btn) {
   btn.classList.add("flash");
-
-  setTimeout(function () {
-    btn.classList.remove("flash");
-  }, 200);
+  setTimeout(() => btn.classList.remove("flash"), 200);
 }
 
 function userFlash(btn) {
   btn.classList.add("userFlash");
-
-  setTimeout(function () {
-    btn.classList.remove("userFlash");
-  }, 200);
+  setTimeout(() => btn.classList.remove("userFlash"), 200);
 }
 
 function levelUp() {
@@ -54,24 +53,29 @@ function levelUp() {
 function checkAns(idx) {
   if (userSeq[idx] === gameSeq[idx]) {
     if (userSeq.length === gameSeq.length) {
-      setTimeout(levelUp, 500);
+      setTimeout(levelUp, 600);
     }
   } else {
-    h4.innerHTML = `Game Over! Your Score was <b>${level}</b> <br> Tap or press key to restart`;
+    h4.innerHTML = `❌ Game Over! Your Score was <b>${level - 1}</b><br>Tap or press key to restart`;
 
-    document.querySelector("body").style.backgroundColor = "red";
-    setTimeout(function () {
-      document.querySelector("body").style.backgroundColor = "white";
-    }, 150);
+    document.body.style.backgroundColor = "red";
+    setTimeout(() => {
+      document.body.style.backgroundColor = "white";
+    }, 200);
 
     reset();
   }
 }
 
-function btnPress() {
+function btnPress(event) {
+  event.stopPropagation(); // prevent restart click
+
+  if (!started) return;
+
   userFlash(this);
   let userColor = this.getAttribute("id");
   userSeq.push(userColor);
+
   checkAns(userSeq.length - 1);
 }
 
