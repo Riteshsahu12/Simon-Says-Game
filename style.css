@@ -47,4 +47,16 @@
 
 .userFlash{
     background-color: green;
+
+}
+.hint{
+    margin-left: 320px;
+    text-align:left;
+    font-size: 0.8rem;
+    margin-top: -10px;
+}
+.hint_heading{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1rem;
 }
